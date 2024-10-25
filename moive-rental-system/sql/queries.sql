@@ -12,7 +12,7 @@ JOIN movies m ON r.movie_id = m.movie_id
 WHERE m.title = 'The Lord of the Rings: The Fellowship of the Ring';
 
 -- 3.	Get the rental history for a specific movie title.
-SELECT  c.first_name, c.last_name, r.rental_date, r.return_date FROM rentals
+SELECT  c.first_name, c.last_name, r.rental_date, r.return_date FROM rentals r
 JOIN customers c ON c.customer_id = r.customer_id
 JOIN movies m ON r.movie_id = m.movie_id
 WHERE m.title = 'The Lord of the Rings: The Fellowship of the Ring';

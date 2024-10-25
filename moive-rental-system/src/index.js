@@ -37,7 +37,14 @@ CREATE TABLE rentals (
     rental_date DATE NOT NULL,
     return_date DATE NOT NULL,
 )
-`};
+`}
+try{
+  await pool.query(createTable)
+  console.log('Tables created successfully');
+} catch(err){
+  console.error('Error creating tables');
+}
+;
 
 /**
  * Inserts a new movie into the Movies table.
@@ -49,46 +56,34 @@ CREATE TABLE rentals (
  */
 async function insertMovie(title, year, genre, director) {
   // TODO: Add code to insert a new movie into the Movies table
-  `
-  INSERT INTO movie (title, release_year, genre, director_name) VALUES
-    ('The Shawshank Redemption', 1994, 'Drama', 'Frank Darabont'),
-    ('The Godfather', 1972, 'Crime', 'Francis Ford Coppola'),
-    ('The Dark Knight', 2008, 'Action', 'Christopher Nolan'),
-    ('The Lord of the Rings: The Return of the King', 2003, 'Adventure', 'Peter Jackson'),
-    ('Pulp Fiction', 1994, 'Crime', 'Quentin Tarantino'),
-    ('Forrest Gump', 1994, 'Drama', 'Robert Zemeckis'),
-    ('Inception', 2010, 'Action', 'Christopher Nolan'),
-    ('The Matrix', 1999, 'Action', 'Lana Wachowski, Lilly Wachowski'),
-    ('The Lord of the Rings: The Fellowship of the Ring', 2001, 'Adventure', 'Peter Jackson'),
-    ('The Lord of the Rings: The Two Towers', 2002, 'Adventure', 'Peter Jackson');
+  const query = `
+    INSERT INTO movies (title, release_year, genre, director_name)
+    VALUES ($1, $2, $3, $4)
+    RETURNING *;
+  `;
+  try {
+    const res = await pool.query(query, [title, year, genre, director]);
+    console.log("Movie inserted:", res.rows[0]);
+  } catch (err) {
+    console.error("Error inserting movie:", err);
+  }
+}
 
-INSERT INTO customers (first_name, last_name, email, phone_number) VALUES
-   ('Alice', 'Appleseed', 'alice.appleseed@example.com'),
-('Bob', 'Brown', 'bob.brown@example.com'),
-('Charlie', 'Clark', 'charlie.clark@example.com'),
-('David', 'Dunn', 'david.dunn@example.com'),
-('Eve', 'Evans', 'eve.evans@example.com');
-
-
-INSERT INTO rentals (customer_id, movie_id, rental_date, return_date) VALUES
-    (1, 1, '2021-01-01', '2021-01-08'),
-    (1, 2, '2021-01-09', '2021-01-16'),
-    (2, 3, '2021-01-17', '2021-01-24'),
-    (2, 4, '2021-01-25', '2021-02-01'),
-    (3, 5, '2021-02-02', '2021-02-09'),
-    (3, 6, '2021-02-10', '2021-02-17'),
-    (4, 7, '2021-02-18', '2021-02-25'),
-    (4, 8, '2021-02-26', '2021-03-05'),
-    (5, 9, '2021-03-06', '2021-03-13'),
-    (5, 10, '2021-03-14', '2021-03-21');
-`};
 
 /**
  * Prints all movies in the database to the console
  */
-async function displayMovies() {
-  // TODO: Add code to retrieve and print all movies from the Movies table
-};
+  async function displayMovies() {
+    const query = "SELECT * FROM movies";
+  
+    try {
+      const res = await pool.query(query);
+      res.rows.forEach(movie => console.log(movie));
+    } catch (err) {
+      console.error("Error displaying movies:", err);
+    }
+  }
+  
 
 /**
  * Updates a customer's email address.
@@ -97,8 +92,25 @@ async function displayMovies() {
  * @param {string} newEmail New email address of the customer
  */
 async function updateCustomerEmail(customerId, newEmail) {
-  // TODO: Add code to update a customer's email address
-};
+  const query = `
+    UPDATE customers
+    SET email = $1
+    WHERE customer_id = $2
+    RETURNING *;
+  `;
+
+  try {
+    const res = await pool.query(query, [newEmail, customerId]);
+    if (res.rowCount > 0) {
+      console.log("Customer updated:", res.rows[0]);
+    } else {
+      console.log("Customer not found.");
+    }
+  } catch (err) {
+    console.error("Error updating customer:", err);
+  }
+}
+
 
 /**
  * Removes a customer from the database along with their rental history.
@@ -106,8 +118,22 @@ async function updateCustomerEmail(customerId, newEmail) {
  * @param {number} customerId ID of the customer to remove
  */
 async function removeCustomer(customerId) {
-  // TODO: Add code to remove a customer and their rental history
-};
+  deleteRentalsQuery = "DELETE FROM rentals WHERE customer_id = $1";
+  deleteCustomerQuery = "DELETE FROM customers WHERE customer_id = $1";
+
+  try {
+    await pool.query(deleteRentalsQuery, [customerId]);
+    const res = await pool.query(deleteCustomerQuery, [customerId]);
+    if (res.rowCount > 0) {
+      console.log("Customer removed.");
+    } else {
+      console.log("Customer not found.");
+    }
+  } catch(err){
+    console.error("Error removing customer:", err);
+  }
+}
+
 
 /**
  * Prints a help message to the console
