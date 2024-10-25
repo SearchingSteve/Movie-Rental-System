@@ -1,4 +1,5 @@
-const { Pool } = require('pg');
+import pkg from 'pg';
+const { Pool } = pkg;
 
 // PostgreSQL connection
 const pool = new Pool({
@@ -118,14 +119,14 @@ async function updateCustomerEmail(customerId, newEmail) {
  * @param {number} customerId ID of the customer to remove
  */
 async function removeCustomer(customerId) {
-  deleteRentalsQuery = "DELETE FROM rentals WHERE customer_id = $1";
-  deleteCustomerQuery = "DELETE FROM customers WHERE customer_id = $1";
+  const deleteRentalsQuery = "DELETE FROM rentals WHERE customer_id = $1";
+  const deleteCustomerQuery = "DELETE FROM customers WHERE customer_id = $1";
 
   try {
     await pool.query(deleteRentalsQuery, [customerId]);
     const res = await pool.query(deleteCustomerQuery, [customerId]);
     if (res.rowCount > 0) {
-      console.log("Customer removed.");
+      console.log("Customer removed. ID:", customerId);
     } else {
       console.log("Customer not found.");
     }

@@ -7,9 +7,11 @@
     "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Matthew English",
+  "author": "Stephen Crocker",
   "license": "MIT",
   "dependencies": {
-    "pg": "^8.13.0"
-  }
+    "pg": "^8.13.1"
+  },
+  "keywords": [],
+  "devDependencies": {}
 }
