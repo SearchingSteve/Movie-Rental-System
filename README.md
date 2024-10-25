@@ -16,7 +16,7 @@ This CLI application serves as a management tool for a movie rental system. It a
 
 
 ## Features
-- Create database tables for movies, customers, and rentals if they don't already exist
+- Automatically creates database tables for movies, customers, and rentals if they don't already exist
 - Insert new movies into the database.
 - Update a customer's email address.
 - Remove a customer and their rental history.
