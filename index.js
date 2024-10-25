@@ -14,7 +14,6 @@ const pool = new Pool({
  * Creates the database tables, if they do not already exist.
  */
 async function createTable() {
-  // TODO: Add code to create Movies, Customers, and Rentals tables
   `CREATE TABLE movies (
     movie_id SERIAL PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
@@ -56,7 +55,6 @@ try{
  * @param {string} director Director of the movie
  */
 async function insertMovie(title, year, genre, director) {
-  // TODO: Add code to insert a new movie into the Movies table
   const query = `
     INSERT INTO movies (title, release_year, genre, director_name)
     VALUES ($1, $2, $3, $4)
@@ -69,7 +67,6 @@ async function insertMovie(title, year, genre, director) {
     console.error("Error inserting movie:", err);
   }
 }
-
 
 /**
  * Prints all movies in the database to the console
@@ -85,7 +82,6 @@ async function insertMovie(title, year, genre, director) {
     }
   }
   
-
 /**
  * Updates a customer's email address.
  * 
@@ -112,7 +108,6 @@ async function updateCustomerEmail(customerId, newEmail) {
   }
 }
 
-
 /**
  * Removes a customer from the database along with their rental history.
  * 
@@ -134,7 +129,6 @@ async function removeCustomer(customerId) {
     console.error("Error removing customer:", err);
   }
 }
-
 
 /**
  * Prints a help message to the console
