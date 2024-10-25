@@ -5,8 +5,6 @@ JOIN movies m ON r.movie_id = m.movie_id
 WHERE c.email = 'alice.appleseed@example.com';
 
 
-
-
 -- 2.	List all customers who have rented a specific movie, provided the movie title.
 SELECT DISTINCT c.first_name, c.last_name FROM rentals r
 JOIN customers c ON r.customer_id = c.customer_id
