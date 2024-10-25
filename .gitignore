@@ -14,8 +14,8 @@
 **/.env
 
 # Ignore OS specific files in any directory
-**/.DS_Store          # macOS
-**/Thumbs.db         # Windows
+**/.DS_Store          
+**/Thumbs.db         
 
 # Ignore IDE specific files in any directory
 **/.vscode/
