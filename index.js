@@ -6,12 +6,13 @@ const { Pool } = pkg;
 
 // PostgreSQL connection
 const pool = new Pool({
-  user: 'myuser', //This should be your username, as it's the default one Postgres uses
+  user: 'postgres', //This _should_ be your username, as it's the default one Postgres uses
   host: 'localhost',
-  database: 'midtermsprint-sem3-db-test', //This should be changed to reflect your actual database
-  password: '', //This should be changed to reflect your database password
+  database: 'your_database_name', //This should be changed to reflect your actual database
+  password: 'your_database_password', //This should be changed to reflect the password you used when setting up Postgres
   port: 5432,
 });
+
 
 /**
  * Checks if a table exists in the database.
