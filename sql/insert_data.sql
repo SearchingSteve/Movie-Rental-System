@@ -1,3 +1,5 @@
+-- Queries to insert data into the tables
+
 -- Insert into movies table
 INSERT INTO movies
     (title, release_year, genre, director_name)

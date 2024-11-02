@@ -1,3 +1,5 @@
+-- Additional queries to find specific data.
+
 -- 1.	Find all movies rented by a specific customer, given their email.
 SELECT m.title FROM rentals r
 JOIN customers c ON r.customer_id = c.customer_id

@@ -1,3 +1,5 @@
+// Main file for the CLI application to manage a movie rental database
+
 import readline from 'readline';
 import pkg from "pg";
 const { Pool } = pkg;

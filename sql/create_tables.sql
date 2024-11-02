@@ -1,3 +1,6 @@
+-- Create tables for the movie rental database
+
+-- Create movie table
 CREATE TABLE movies (
     movie_id SERIAL PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
@@ -6,6 +9,7 @@ CREATE TABLE movies (
     director_name VARCHAR(50) NOT NULL
 );
 
+-- Create customers table
 CREATE TABLE customers (
     customer_id SERIAL PRIMARY KEY,
     first_name VARCHAR(50) NOT NULL,
@@ -14,6 +18,7 @@ CREATE TABLE customers (
     phone_number TEXT NOT NULL
 );
 
+-- Create rentals table
 CREATE TABLE rentals (
     rental_id SERIAL PRIMARY KEY,
     customer_id INT REFERENCES customers(customer_id),
