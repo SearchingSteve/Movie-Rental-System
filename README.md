@@ -23,9 +23,11 @@ This CLI application serves as a management tool for a movie rental system. It a
 - Display all movies in the database.
 
 ## Prerequisites
-Before running this application, ensure you have the following installed:
-- **Node.js** (v22 recommended)
-- **PostgreSQL** server running
+Before running this application, ensure the following are in place:
+- **Node.js** (version 22 recommended)
+- **PostgreSQL** server running and accessible
+- **Database Initialization**: To test with a fresh set of data, run `deleteAll` followed by `insertMock` to repopulate the database.
+
 
 ## Installation
 
@@ -84,11 +86,6 @@ Example:
 node index.js insert "Beetlejuice" 1988 "Comedy" "Tim Burton"
 ```
 
-### Show All Movies
-To display all movies currently in the database:
-```bash
-node index.js show
-```
 
 ### Update Customer Email
 To update a customer's email address:
@@ -110,6 +107,36 @@ Example:
 node index.js remove 1
 ```
 
+### Show All Movies
+To display all movies currently in the database:
+```bash
+node index.js showMovies
+```
+
+### Show All Customers
+To display all customers currently in the database:
+```bash
+node index.js showCustomers
+```
+
+### Show All Rentals
+To display all rental records in the database:
+```bash
+node index.js showRentals
+```
+
+### Insert Mock Data
+To insert sample data into the database:
+```bash
+node index.js insertMock
+```
+
+### Delete All Data
+To delete all data from the database:
+```bash
+node index.js deleteAll
+```
+
 ### Help
 To view all available commands:
 ```bash
@@ -120,6 +147,7 @@ node index.js
 - Ensure your PostgreSQL server is running before using the application.
 - Use the `sql` files to set up the database and insert sample data if needed.
 - Adjust the database connection details in `index.js` to match your PostgreSQL setup.
+
 
 ## License
 
