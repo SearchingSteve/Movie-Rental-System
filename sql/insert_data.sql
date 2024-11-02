@@ -27,7 +27,7 @@ VALUES
 INSERT INTO rentals
     (customer_id, movie_id, rental_date, return_date)
 VALUES
--- One user renting one or many movies
+    -- One user renting one or many movies
     (1, 1, '2021-01-01', '2021-01-08'),
     (1, 2, '2021-01-09', '2021-01-16'),
     (2, 3, '2021-01-17', '2021-01-24'),
@@ -39,11 +39,11 @@ VALUES
     (5, 9, '2021-03-06', '2021-03-13'),
     (5, 10, '2021-03-14', '2021-03-21'),
 
--- One movie rented by multiple user
+    -- One movie rented by multiple user
     (1, 9, '2021-03-28', '2021-04-04'),
-    (5, 9, '2021-04-12', '2021-04-19'), 
+    (5, 9, '2021-04-12', '2021-04-19'),
 
--- Movie still rented out  
+    -- Movie still rented out  
     (1, 4, '2024-04-12', '2025-04-12'),
     (2, 1, '2024-04-12', '2025-04-12');
 
